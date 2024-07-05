@@ -3,10 +3,6 @@ const parseAndVerifyObjectPairs = require('./object-parser');
 const reconstructObject = require('./reconstruct-object');
 const { sortPairs } = require('./sort-utils');
 // write extension to expand const { a, b, c } to new line
-// write extension to expand const { a, b, c } to new line
-// write extension to expand const { a, b, c } to new line
-// write extension to expand const { a, b, c } to new line
-// write extension to expand const { a, b, c } to new line
 /**
  * Helper function to parse and format the input text.
  * @param {string} text - The input text to parse.

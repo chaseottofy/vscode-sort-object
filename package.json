@@ -4,11 +4,30 @@
   "description": "Sort an entire object or selection of object key pairs in ascending or descending order.",
   "version": "0.0.1",
   "publisher": "sortObjectSelection",
+  "icon": "logo.png",
+  "keywords": [
+    "sort",
+    "object",
+    "selection",
+    "js-sort",
+    "sort-object",
+    "sort-js-object",
+    "sort-javascript-object"
+  ],
+  "bugs": {
+    "url": "https://github.com/chaseottofy/vscode-sort-object/issues"
+  },
   "engines": {
     "vscode": "^1.90.0"
   },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chaseottofy/vscode-sort-object"
+  },
   "categories": [
-    "Other"
+    "Other",
+    "Formatters"
   ],
   "main": "./src/extension.js",
   "contributes": {
@@ -57,10 +76,7 @@
     "test": "mocha"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.6.0",
-    "@types/mocha": "^10.0.7",
-    "@vscode/test-cli": "^0.0.9",
     "eslint": "^8.57.0",
     "eslint-plugin-promise": "^6.4.0",
     "eslint-plugin-regexp": "^2.6.0",
