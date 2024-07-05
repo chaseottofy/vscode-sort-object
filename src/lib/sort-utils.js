@@ -17,11 +17,11 @@ function sortPairs(pairs, direction = 'asc') {
 
     if (keyB.startsWith('...')) {
       keyB = keyB.slice(3);
-    }
+    } 
 
     return direction === 'asc'
-      ? keyA.localeCompare(keyB)
-      : keyB.localeCompare(keyA);
+      ? keyA.localeCompare(keyB, undefined, { numeric: true })
+      : keyB.localeCompare(keyA, undefined, { numeric: true });
   });
   return sortedPairs.map((pair) => {
     if (pair.nestedValue) {

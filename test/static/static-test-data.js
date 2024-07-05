@@ -161,6 +161,35 @@ const staticInvalidEdgeCases = {
 };
 
 const staticValidEdgeCases = {
+  multLineValue: {
+    inputs: [
+      `let obj = {
+  a: new String('a')
+    .length
+    .toString()
+    .trim(),
+  b: new String('b'),
+}`,
+    ],
+    output:
+      `let obj = {
+  a: new String('a').length.toString().trim(),
+  b: new String('b'),
+}`,
+  },
+  naturalOrder: {
+    inputs: [
+      `let obj = {
+  a10b: 'teszt',
+  a2b: 2,
+}`
+    ],
+    output:
+      `let obj = {
+  a2b: 2,
+  a10b: 'teszt',
+}`
+  },
   emptyWithComments: {
     inputs: [
       `let obj = {} // hey there`,

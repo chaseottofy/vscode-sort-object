@@ -3,6 +3,7 @@ const parseAndVerifyObjectPairs = require('./object-parser');
 const reconstructObject = require('./reconstruct-object');
 const sortPairs = require('./sort-utils');
 const lintObjectContent = require('./lint-content');
+const concatMultiMethod = require('./concat-multi');
 
 /**
  * Helper function to parse and format the input text.
@@ -22,20 +23,25 @@ function parseAndFormat(text, direction) {
     throw new Error('Invalid input length');
   }
 
+  const concatMulti = concatMultiMethod(inputSplit);
+
   const {
     isKeyPairs,
     objectContent,
     objectStart,
     objectEnd,
-  } = handleFullObjectSelection(inputSplit);
+  } = handleFullObjectSelection(concatMulti);
 
   if (objectContent.trim() === '') {
     return objectStart.trim() + objectEnd.slice(-1);
   }
 
   const formattedObjectContent = lintObjectContent(objectContent);
+
   const verifiedObjectPairs = parseAndVerifyObjectPairs(formattedObjectContent);
+
   const sortedPairs = sortPairs(verifiedObjectPairs, direction);
+
   return isKeyPairs
     ? reconstructObject(sortedPairs)
     : `${objectStart}${reconstructObject(sortedPairs)}${objectEnd}`;
