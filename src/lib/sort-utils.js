@@ -5,8 +5,20 @@
  */
 function sortPairs(pairs, direction = 'asc') {
   const sortedPairs = pairs.sort((a, b) => {
-    const { originalKey: keyA } = a;
-    const { originalKey: keyB } = b;
+    let { originalKey: keyA } = a;
+    let { originalKey: keyB } = b;
+
+    if (!keyA) return 1;
+    if (!keyB) return -1;
+
+    if (keyA.startsWith('...')) {
+      keyA = keyA.slice(3);
+    }
+
+    if (keyB.startsWith('...')) {
+      keyB = keyB.slice(3);
+    }
+
     return direction === 'asc'
       ? keyA.localeCompare(keyB)
       : keyB.localeCompare(keyA);

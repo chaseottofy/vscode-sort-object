@@ -1,4 +1,5 @@
 const {
+  LINE_IS_SPREAD,
   MAX_DEPTH,
   MAX_LINES,
   NESTED_OBJ_START_REGEX,
@@ -26,10 +27,8 @@ function parseAndVerifyObjectPairs(text, depth = 0) {
 
   const parsedPairs = [];
   let currentPair = { formatting: {}, originalKey: '', originalValue: '' };
-  // let currentArrayPair = { formatting: {}, originalKey: '', originalValue: '', nestedValue: [] };
   let nestedContent = '', arrayContent = '';
   let arrayWhitespacePre = 0, nestedDepth = 0, arrayDepth = 0;
-  // let isObjInArray = false;
 
   for (const [lineNumber, line_] of lines.entries()) {
     let whitespacePrefix = (line_.match(/^\s*/) || [''])[0];
@@ -42,7 +41,6 @@ function parseAndVerifyObjectPairs(text, depth = 0) {
       if (arrayDepth > 0) {
         arrayWhitespacePre += 1;
         arrayContent += '  '.repeat(arrayWhitespacePre) + line + '\n';
-        // isObjInArray = true;
         continue;
       }
       if (nestedDepth === 0) {
@@ -73,7 +71,6 @@ function parseAndVerifyObjectPairs(text, depth = 0) {
     if ((line === '}' || line === '},')) {
       if (arrayDepth > 0) {
         arrayWhitespacePre -= 1;
-        // isObjInArray = false;
       } else {
         nestedDepth -= 1;
         if (nestedDepth === 0) {
@@ -106,7 +103,6 @@ function parseAndVerifyObjectPairs(text, depth = 0) {
       arrayDepth -= closeBraceCount;
       arrayWhitespacePre -= closeBraceCount;
       arrayContent += '  '.repeat(arrayWhitespacePre + 1) + line + '\n';
-      // if (isObjInArray) currentArrayPair.nestedValue.push(line);
       if (arrayDepth === 0) {
         const idx = arrayContent.indexOf(':');
         if (idx > -1) {
@@ -123,13 +119,10 @@ function parseAndVerifyObjectPairs(text, depth = 0) {
             },
             originalKey: origKey.trim(),
             originalValue: origValue.trimEnd(),
-            // objNested: currentArrayPair.nestedValue,
           });
         }
         arrayContent = '';
         arrayWhitespacePre = 0;
-        // currentArrayPair = { formatting: {}, originalKey: '', originalValue: '' };
-        // isObjInArray = false;
       }
       continue;
     }
@@ -169,6 +162,22 @@ function parseAndVerifyObjectPairs(text, depth = 0) {
         },
         originalKey: key,
         originalValue: value,
+      });
+    }
+
+    if (LINE_IS_SPREAD.test(line)) {
+      parsedPairs.push({
+        formatting: {
+          keyQuote: '',
+          keySpace: '',
+          leadingSpace: '',
+          trailingSpace: '',
+          valueSpace: '',
+          whitespacePrefix,
+        },
+        originalKey: line.trim(),
+        originalValue: '',
+        isSpread: true,
       });
     }
   }

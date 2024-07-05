@@ -170,6 +170,31 @@ const staticValidEdgeCases = {
     ],
     output: 'let obj = {}',
   },
+  emptyWithSpread: {
+    inputs: [
+      `let obj = {
+  ...rest,
+  a: 1,
+  b: 2,
+}`,
+      `let obj = {
+  a: 1,
+  ...rest,
+  b: 2,
+}`,
+      `let obj = {
+  a: 1,
+  b: 2,
+  ...rest,
+}`,
+    ],
+    output:
+      `let obj = {
+  a: 1,
+  b: 2,
+  ...rest,
+}`,
+  },
   emptyWithDeclarationAndName: {
     inputs: [
       `let obj = {}`,
