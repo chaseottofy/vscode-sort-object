@@ -2,7 +2,7 @@
   "name": "sort-object-selection",
   "displayName": "Sort Object Selection",
   "description": "Sort an entire object or selection of object key pairs in ascending or descending order.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "ChaseOttofy",
   "icon": "logo.png",
   "keywords": [
