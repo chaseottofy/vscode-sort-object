@@ -1,5 +1,5 @@
 const configurations = {
-  publisher: 'sortObjectSelection',
+  publisher: 'ChaseOttofy',
   commandName: 'sortObjectSelection',
   commands: {
     'asc': 'sortObjectSelectionAscending',

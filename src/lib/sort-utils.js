@@ -4,16 +4,14 @@
  * @returns {Array<Object>} The sorted array of object pairs.
  */
 function sortPairs(pairs, direction = 'asc') {
-  return pairs.sort((a, b) => {
+  const sortedPairs = pairs.sort((a, b) => {
     const { originalKey: keyA } = a;
     const { originalKey: keyB } = b;
     return direction === 'asc'
       ? keyA.localeCompare(keyB)
       : keyB.localeCompare(keyA);
-  }).map((pair) => {
-    if ('arrayValue' in pair) {
-      return pair;
-    }
+  });
+  return sortedPairs.map((pair) => {
     if (pair.nestedValue) {
       pair.nestedValue = sortPairs(pair.nestedValue, direction);
     }
@@ -21,6 +19,4 @@ function sortPairs(pairs, direction = 'asc') {
   });
 };
 
-module.exports = {
-  sortPairs,
-};
+module.exports = sortPairs;

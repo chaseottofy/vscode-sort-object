@@ -1,8 +1,9 @@
 const handleFullObjectSelection = require('./text-processor.js');
 const parseAndVerifyObjectPairs = require('./object-parser');
 const reconstructObject = require('./reconstruct-object');
-const { sortPairs } = require('./sort-utils');
-// write extension to expand const { a, b, c } to new line
+const sortPairs = require('./sort-utils');
+const lintObjectContent = require('./lint-content');
+
 /**
  * Helper function to parse and format the input text.
  * @param {string} text - The input text to parse.
@@ -32,11 +33,9 @@ function parseAndFormat(text, direction) {
     return objectStart.trim() + objectEnd.slice(-1);
   }
 
-  const sortedPairs = sortPairs(
-    parseAndVerifyObjectPairs(objectContent), 
-    direction,
-  );
-
+  const formattedObjectContent = lintObjectContent(objectContent);
+  const verifiedObjectPairs = parseAndVerifyObjectPairs(formattedObjectContent);
+  const sortedPairs = sortPairs(verifiedObjectPairs, direction);
   return isKeyPairs
     ? reconstructObject(sortedPairs)
     : `${objectStart}${reconstructObject(sortedPairs)}${objectEnd}`;

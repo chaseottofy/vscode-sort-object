@@ -12,13 +12,15 @@ const {
  * @throws {Error} If the text is empty or processing fails.
  */
 function handleFullObjectSelection(text) {
-  text = text.trim();
-  text = text.replaceAll(COMMENT_REGEX, '$2');
-  text = text.replaceAll(COMMENT_FRAGMENT_REGEX, '');
-  if (text) text = text.replaceAll(WHITESPACE_SURROUND_REGEX, '');
-  else throw new Error('No text selected');
+  text = text
+    .trim()
+    .replaceAll(COMMENT_REGEX, '$2')
+    .replaceAll(COMMENT_FRAGMENT_REGEX, '')
+    .replaceAll(WHITESPACE_SURROUND_REGEX, '');
+
+  if (!text) throw new Error('No text selected');
   const match = text.match(DECLARATION_REGEX);
-  
+
   const matchData = {
     isKeyPairs: false,
     objectContent: '',
@@ -29,12 +31,8 @@ function handleFullObjectSelection(text) {
 
   if (match) {
     const [, declarationType, objectName, objectContent] = match;
-    if (declarationType) {
-      matchData.objectStart += declarationType + ' ';
-    }
-    if (objectName) {
-      matchData.objectStart += objectName;
-    }
+    if (declarationType) matchData.objectStart += declarationType + ' ';
+    if (objectName) matchData.objectStart += objectName;
     matchData.objectStart += ' =' + ' {\n';
     matchData.objectContent += objectContent;
     matchData.objectEnd += '}';
@@ -51,5 +49,4 @@ function handleFullObjectSelection(text) {
 
   return matchData;
 }
-
 module.exports = handleFullObjectSelection;

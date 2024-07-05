@@ -1,4 +1,14 @@
 // A launch configuration that launches the extension inside a new window
+// {
+//   "name": "Launch Tests",
+//   "type": "extensionHost",
+//   "request": "launch",
+//   "runtimeExecutable": "${execPath}",
+//   "args": [
+//     "--extensionDevelopmentPath=${workspaceRoot}",
+//     "--extensionTestsPath=${workspaceRoot}/test"
+//   ],
+// }
 {
   "version": "0.1.0",
   "configurations": [

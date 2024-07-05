@@ -3,7 +3,7 @@
   "displayName": "Sort Object Selection",
   "description": "Sort an entire object or selection of object key pairs in ascending or descending order.",
   "version": "0.0.1",
-  "publisher": "sortObjectSelection",
+  "publisher": "ChaseOttofy",
   "icon": "logo.png",
   "keywords": [
     "sort",
@@ -30,14 +30,15 @@
     "Formatters"
   ],
   "main": "./src/extension.js",
+  "activationEvents": [],
   "contributes": {
     "commands": [
       {
-        "command": "sortObjectSelection.sortObjectSelectionAscending",
+        "command": "ChaseOttofy.sortObjectSelectionAscending",
         "title": "Sort Object Selection (Ascending)"
       },
       {
-        "command": "sortObjectSelection.sortObjectSelectionDescending",
+        "command": "ChaseOttofy.sortObjectSelectionDescending",
         "title": "Sort Object Selection (Descending)"
       }
     ],
@@ -45,25 +46,25 @@
       "editor/context": [
         {
           "when": "editorHasSelection",
-          "command": "sortObjectSelection.sortObjectSelectionAscending",
+          "command": "ChaseOttofy.sortObjectSelectionAscending",
           "group": "1_modification"
         },
         {
           "when": "editorHasSelection",
-          "command": "sortObjectSelection.sortObjectSelectionDescending",
+          "command": "ChaseOttofy.sortObjectSelectionDescending",
           "group": "1_modification"
         }
       ]
     },
     "keybindings": [
       {
-        "command": "sortObjectSelection.sortObjectSelectionAscending",
+        "command": "ChaseOttofy.sortObjectSelectionAscending",
         "key": "ctrl+shift+alt+u",
         "mac": "cmd+shift+alt+u",
         "when": "editorTextFocus"
       },
       {
-        "command": "sortObjectSelection.sortObjectSelectionDescending",
+        "command": "ChaseOttofy.sortObjectSelectionDescending",
         "key": "ctrl+shift+alt+d",
         "mac": "cmd+shift+alt+d",
         "when": "editorTextFocus"
